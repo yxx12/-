@@ -1,0 +1,29 @@
+server:
+  port: 18086
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:7001/eureka
+  instance:
+    prefer-ip-address: true
+feign:
+  hystrix:
+    enabled: true
+spring:
+  thymeleaf:
+    cache: false
+  application:
+    name: search-web
+  # 多个接口上的@FeignClient(“相同服务名”)会报错，overriding is disabled。(覆盖 禁止)
+  # 设置 为true ,即 允许 同名
+  main:
+    allow-bean-definition-overriding: true
+ribbon:
+  ReadTimeout: 300000
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 10000

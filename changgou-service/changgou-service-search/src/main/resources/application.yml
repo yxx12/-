@@ -1,0 +1,33 @@
+server:
+  port: 18085
+spring:
+  application:
+    name: search
+  # 多个接口上的@FeignClient(“相同服务名”)会报错，overriding is disabled。(覆盖 禁止)
+  # 设置 为true ,即 允许 同名
+  main:
+    allow-bean-definition-overriding: true
+  data:
+    elasticsearch:
+      cluster-name: my-application
+      cluster-nodes: 192.168.211.132:9300
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:7001/eureka
+  instance:
+    prefer-ip-address: true
+feign:
+  hystrix:
+    enabled: true
+#超时配置
+ribbon:
+  ReadTimeout: 300000
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 30000

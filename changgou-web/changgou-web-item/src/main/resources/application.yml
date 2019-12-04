@@ -1,0 +1,33 @@
+server:
+  port: 18087
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:7001/eureka
+  instance:
+    prefer-ip-address: true
+feign:
+  hystrix:
+    enabled: true
+spring:
+  thymeleaf:
+    cache: false
+  application:
+    name: item
+  # 多个接口上的@FeignClient(“相同服务名”)会报错，overriding is disabled。(覆盖 禁止)
+  # 设置 为true ,即 允许  同名
+  main:
+    allow-bean-definition-overriding: true
+#超时配置
+ribbon:
+  ReadTimeout: 300000
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 30000
+# 生成静态页的位置
+pagepath:  D:\ideaProjects\changgou-parent\changgou-web\changgou-web-item\src\main\resources\templates\items
